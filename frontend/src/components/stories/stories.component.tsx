@@ -128,7 +128,8 @@ const StoriesComponent = () => {
                 <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                   <textarea
                     {...register("prompt")}
-                    className="w-full h-40 resize-none border-none outline-none bg-transparent text-gray-300 focus:ring-0 text-lg leading-relaxed tracking-wide placeholder:italic placeholder:text-gray-500"
+                    aria-label="Story prompt input"
+                    className="w-full h-40 resize-none border-none outline-none bg-transparent text-gray-300 focus:ring-2 focus:ring-blue-500 text-lg leading-relaxed tracking-wide placeholder:italic placeholder:text-gray-500"
                     placeholder="Every great story begins with a single idea. What’s yours?"
                     value={textareaValue}
                     onChange={(e) => setTextareaValue(e.target.value)}
@@ -136,6 +137,7 @@ const StoriesComponent = () => {
                   <div className="absolute bottom-3 right-3 flex items-center space-x-2">
                     <button
                       type="submit"
+                        aria-label="Generate story"
                       disabled={loading}
                       className={`rounded-lg bg-gradient-to-r from-blue-400 to-indigo-500 text-gray-200 px-6 py-3 font-semibold ${
                         loading
@@ -159,6 +161,7 @@ const StoriesComponent = () => {
                   className="w-full p-2 bg-slate-800 text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none text-sm"
                   value={selectedPrompt}
                   onChange={handlePromptSelect}
+                  aria-label="Select an example prompt"
                 >
                   <option value="" disabled>
                     Select a prompt
