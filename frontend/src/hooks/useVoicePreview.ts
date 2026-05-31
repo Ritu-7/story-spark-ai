@@ -24,13 +24,13 @@ export const useVoicePreview = (): UseVoicePreviewResult => {
   const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
 
   const stopPreview = useCallback(() => {
-    if (previewUtteranceRef.current) {
+    if (isPreviewPlaying && previewUtteranceRef.current) {
       window.speechSynthesis.cancel();
       previewUtteranceRef.current = null;
     }
     setIsPreviewPlaying(false);
     setPreviewingVoiceId(null);
-  }, []);
+  }, [isPreviewPlaying]);
 
   const playPreview = useCallback(
     (voice: SpeechVoiceOption) => {
