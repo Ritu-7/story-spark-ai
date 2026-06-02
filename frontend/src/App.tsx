@@ -12,11 +12,29 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import ScrollToTop from "./components/ScrollToTop";
 import MagicCursorComponent from "./components/magic-cursor/magic_cursor.component";
 
+import AboutUsComponent from "./components/footer/about-us.tsx";
+import AnalyticsPage from "./components/dashboard/analytics/analytics.page";
+import BlogComponent from "./components/footer/blog.tsx";
+import BookmarksComponent from "./components/post/bookmarks.component";
+import BranchingStory from "./components/stories/BranchingStory";
+import CareerComponent from "./components/footer/career.tsx";
+import CollabHome from "./components/collab/CollabHome";
+import CollabRoom from "./components/collab/CollabRoom";
+import StoriesComponent from "./components/stories/stories.component";
+import CommunityComponent from "./components/community/community.component";
+import Contact from "./components/contactus/contactus";
+import ContributorsComponent from "./components/footer/contributors";
+import CookiePolicy from "./components/footer/cookie-policy.tsx";
+import DashboardComponent from "./components/dashboard/dashboard.component";
+import EmailValidationComponent from "./components/email_validation/email.validation.component";
+import ExploreComponent from "./components/post/post.component";
+import ForgotPasswordComponent from "./components/login/forgot_password.component";
+import GuidelinesComponent from "./components/footer/guidelines.tsx";
+import HelpCenterComponent from "./components/help_center/help_center.component";
 import HeroSectionComponent from "./components/hero/hero_section.component";
 import HomeComponent from "./components/home/home.component";
 import NotFoundComponent from "./components/not-found.component";
 import DashboardLayout from "./components/dashboard/dashboard_layout.component";
-
 // Lazy-loaded page components
 const AboutUsComponent = React.lazy(() => import("./components/footer/about-us.tsx"));
 const AnalyticsPage = React.lazy(() => import("./components/dashboard/analytics/analytics.page"));
@@ -57,11 +75,35 @@ const DashboardComponent = React.lazy(() => import("./components/dashboard/dashb
 const WriterApplicationComponent = React.lazy(() => import("./components/dashboard/writers/writer_application.component"));
 const UserComponent = React.lazy(() => import("./components/dashboard/users/user.component"));
 const ForgotPasswordComponent = React.lazy(() => import("./components/login/forgot_password.component"));
+import PaymentComponent from "./components/home/pricing/payment.component";
+import PostDetailsComponent from "./components/post/post.details.component";
+import PostListsComponent from "./components/dashboard/posts/post_lists.component";
+import PricingComponent from "./components/pricing/pricing.component";
+import PrivacyPolicy from "./components/footer/Privacy.tsx";
+import Terms from "./components/footer/terms.tsx";
+import TemplatesComponent from "./components/templates/templates.component";
+import ResourcesListComponent from "./components/community/resources_list.component";
+import ResourceDetailComponent from "./components/community/resource_detail.component";
+import PostsPage from "./components/post/posts.page";
+import ReportBug from "./components/report-bug/ReportBug";
+import StoryWorkspace from "./components/story/StoryWorkspace";
+import ProfileComponent from "./components/dashboard/profile/profile.component";
+import PublishedStoriesComponent from "./components/dashboard/posts/published_stories.component";
+import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+import SettingComponent from "./components/dashboard/settings/settings.component";
+import SignUpComponent from "./components/signup/signup.component";
+import SimpleProtectedRoute from "./components/ProtectedRoute";
+import StoryInspirationWrapper from "./components/StoryInspirationWrapper";
+import UserComponent from "./components/dashboard/users/user.component";
+import WriterApplicationComponent from "./components/dashboard/writers/writer_application.component";
+import WritingAssistantComponent from "./components/writing-assistant/writing_assistant.component";
 
 type ProtectedRouteProps = {
   allowedRoles: string[];
   element?: React.ReactElement;
 };
+
 
 const ProtectedRoute = ({ allowedRoles, element }: ProtectedRouteProps) => {
   const user = getUserInfo();
@@ -99,6 +141,9 @@ const router = createBrowserRouter([
       { path: "templates", element: <TemplatesComponent /> },
       { path: "writing-assistant", element: <WritingAssistantComponent /> },
       { path: "story-inspiration", element: <StoryInspirationWrapper /> },
+      { path: "stories", element: <StoriesComponent /> },
+      { path: "posts", element: <PostsPage /> },
+      { path: "story-workspace", element: <StoryWorkspace /> },
       { path: "login", element: <LoginComponent /> },
       { path: "signup", element: <SignUpComponent /> },
       { path: "forgot-password", element: <ForgotPasswordComponent /> },
@@ -236,5 +281,6 @@ const router = createBrowserRouter([
 function App() {
   return <RouterProvider router={router} />;
 }
+
 
 export default App;
