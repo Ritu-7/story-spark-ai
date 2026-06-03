@@ -36,39 +36,39 @@ const toggleReaction = async (
 
   if (existingReaction) {
     await Reaction.deleteOne({ _id: existingReaction._id });
+    
     const updatedPost = await Post.findOneAndUpdate(
       { _id: postId },
       { $inc: { likesCount: -1 } },
       { new: true }
     );
-    return { message: "Reaction removed successfully", likesCount: updatedPost?.likesCount || 0 };
+    
+    if (updatedPost && updatedPost.likesCount < 0) {
+      await Post.updateOne({ _id: postId }, { $set: { likesCount: 0 } });
+    }
+    
+    return {
+      message: "Reaction removed",
+      likesCount: Math.max(0, updatedPost?.likesCount ?? 0),
+    };
   } else {
     await Reaction.create({
       postId: new Types.ObjectId(postId),
       userId: user._id,
-      type: type,
+      type,
     });
+    
     const updatedPost = await Post.findOneAndUpdate(
       { _id: postId },
       { $inc: { likesCount: 1 } },
       { new: true }
     );
-    return { message: "Reaction added successfully", likesCount: updatedPost?.likesCount || 0 };
+    
+    return { 
+      message: "Reaction added successfully", 
+      likesCount: updatedPost?.likesCount || 0 
+    };
   }
-
-  const newReaction = await Reaction.create({
-    postId: new Types.ObjectId(postId),
-    userId: user._id,
-    type,
-  });
-
-  post.likesCount = (post.likesCount || 0) + 1;
-  post.reactions = post.reactions || [];
-  post.reactions.push(newReaction._id);
-
-  await post.save();
-
-  return { message: "Reaction added", likesCount: post.likesCount };
 };
 
 export const ReactionService = {
